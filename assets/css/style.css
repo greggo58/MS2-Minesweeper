@@ -1,0 +1,54 @@
+.grid {
+    margin: auto;
+    height: 300px;
+    width: 300px;
+    background-color:lightgray ;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid div {
+    height: 30px;
+    width: 30px;
+    font-size: 12px;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: outset;
+}
+
+.checked {
+    background-color: lightgreen;
+}
+
+.flagged {
+    background-color: lightskyblue;
+    color: navy;
+}
+
+#play-again-button {
+    margin: 10px;
+}
+
+/* @media screen and (max-width: 768px) {
+
+    .grid {
+        height: 100vw;
+        width: 100vw;
+        background-color: lightgray;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .grid div {
+        height: 10vw;
+        width: 10vw;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-style: outset;
+    }
+
+  } */
