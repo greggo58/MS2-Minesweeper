@@ -11,6 +11,8 @@ For some ideas on ways to accomplish tasks I used the [Stackoverflow](https://st
 
 I used a mix of jQuery and javascript.
 
+I had issues with GitPod and so I wrote this mainly in VS Code on my local PC.
+
 ### Existing Features
 
 + __Navigation Bar__
