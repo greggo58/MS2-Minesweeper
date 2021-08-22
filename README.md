@@ -9,10 +9,6 @@ I then added in some touch screen functionalities (mobile first approach) and ex
 
 I used a mix of jQuery and javascript.
 
-## Features
-
-The features are set out in a way to display consumable data to the user in small bite-sized pieces.
-
 ### Existing Features
 
 + __Navigation Bar__
@@ -32,9 +28,14 @@ The features are set out in a way to display consumable data to the user in smal
         + If all flags are used but some flagged squares are not bombs, the game will not end. If more flags are used the flag counter goes into negative numbers
     + Best time
         + Records the timer value at game end if less than the original time.
+    + Reset button
+        + Resets grid
+    + Instructions alert
+        + Pop up alert with simple instructions for player
 
 + __Minesweeper Grid__
 
+    + Hidden game result message that shows success or failure depending on game outcome
     + Grid div filled with small square divs (wrapped at 10 divs)
 
 ### Features Left to Implement
