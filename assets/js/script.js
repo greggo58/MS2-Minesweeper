@@ -24,9 +24,9 @@ $(document).ready(function () {
         $('#game-result').text('');
         $('#game-result-div').removeClass('alert-danger');
         $('#game-result-div').removeClass('alert-success');
-    };
+    }
 
-    resetButton.click(function (e) {
+    resetButton.click(function () {
         isGameOver = false;
         let currentLevel = $('ul.nav li a.link-primary').attr('id');
         switch (currentLevel) {
@@ -49,9 +49,9 @@ $(document).ready(function () {
         grid.children().remove();
         // reoload squares into grid
         loadGrid();
-    })
+    });
 
-    instructionsButton.click(function (e) { 
+    instructionsButton.click(function () { 
         alert(`
         Click / touch to check a square
         Right-Click / long-touch to flag a square
@@ -96,7 +96,7 @@ $(document).ready(function () {
             list the anchor tag children per sibling */
             anchorCousins = $(e.target).parent().siblings('li').children('a');
             // for each cousin do the reverse
-            for (anchorCousin of anchorCousins) {
+            for (let anchorCousin of anchorCousins) {
                 // remove class 'link-primary' (only if it exists) for my selected navbar link (blue)
                 $(`#${anchorCousin.id}`).toggleClass('link-primary', false);
                 // add class 'link-dark' (only if it exists) for my selected navbar link (dark gray)
@@ -104,7 +104,7 @@ $(document).ready(function () {
             }
             let currentLevelAfter = $('.link-primary').attr('id');
             if (currentLevelBefore !== currentLevelAfter) $('#best').text('0');
-        })
+        });
     }
 
     //************************************************************************
@@ -142,7 +142,7 @@ $(document).ready(function () {
         gridArray = emptyArray.concat(bombsArray);
 
         // shuffle the grid array evenly
-        gridArray.sort(function (a, b) { return 0.5 - Math.random() })
+        gridArray.sort(function () { return 0.5 - Math.random(); });
 
         // build all the required divs (total divs = dimensionWH * dimensionWH)
         for (let i = 0; i < dimensionWH * dimensionWH; i++) {
@@ -153,7 +153,7 @@ $(document).ready(function () {
             // add class 'empty' / 'bomb' depending on gridArray position [i]
             $(square).addClass(gridArray[i]);
             // add event to register normal / left click
-            square.addEventListener('click', function (e) {
+            square.addEventListener('click', function () {
                 // execute click function
                 click(square);
             });
@@ -246,7 +246,7 @@ $(document).ready(function () {
                 if (!touchLimitReached && !touchMoved) onShortTouch(newEvent);
                 break;
         }
-    };
+    }
 
     function onLongTouch(newEvent) {
         // identify target square from the touch and run the function as though the square was right-clicked
@@ -291,9 +291,9 @@ $(document).ready(function () {
 
     function gameTimer() {
         let seconds = Math.floor(secondCounter);
-        $('#time').text(`${Math.floor(seconds / 100)}`)
+        $('#time').text(`${Math.floor(seconds / 100)}`);
         secondCounter++;
-    };
+    }
 
     function click(square) {
         let currentId = $(square).attr('id');
@@ -332,10 +332,10 @@ $(document).ready(function () {
                 if ($('.empty.checked').length === emptyCount) {
                     clearInterval(timerRec);
                     if (parseInt($('#best').text()) === 0) {
-                        $('#best').text(parseInt($('#time').text()))
+                        $('#best').text(parseInt($('#time').text()));
                     } else if (parseInt($('#time').text()) < parseInt($('#best').text())) {
-                        $('#best').text(parseInt($('#time').text()))
-                    };
+                        $('#best').text(parseInt($('#time').text()));
+                    }
                     $('#game-result').text('YAY! Game over, you win!');
                     $('#game-result-div').addClass('alert-success');
                     console.log('Game over, you win!');
@@ -349,8 +349,8 @@ $(document).ready(function () {
             // consider this square as checked
             $(square).addClass('checked');
             $('.checked').css('border-style', 'inset');
-        };
-    };
+        }
+    }
 
     //************************************************************************
     // right-click function from event listener
@@ -362,20 +362,20 @@ $(document).ready(function () {
         if ($(square).hasClass('checked')) return;
         // Square is already flagged? Remove '.flagged' class - vice versa
         $(square).toggleClass('flagged');
-        $('#flags').text(`${bombsCount - $('.flagged').length}`)
+        $('#flags').text(`${bombsCount - $('.flagged').length}`);
         if ($(square).hasClass('flagged')) {
             $(square).html('<i class="fas fa-flag"></i>');
         } else {
             $(square).text('');
-        };
+        }
         // all bomb squares flagged only - player has won and the game is over...
         if ($('.bomb.flagged').length === bombsCount && $('.flagged').length === bombsCount) {
             clearInterval(timerRec);
             if (parseInt($('#best').text()) === 0) {
-                $('#best').text(parseInt($('#time').text()))
+                $('#best').text(parseInt($('#time').text()));
             } else if (parseInt($('#time').text()) < parseInt($('#best').text())) {
-                $('#best').text(parseInt($('#time').text()))
-            };
+                $('#best').text(parseInt($('#time').text()));
+            }
             $('#game-result').text('YAY! Game over, you win!');
             $('#game-result-div').addClass('alert-success');
             console.log('Game over, you win!');
@@ -449,7 +449,7 @@ $(document).ready(function () {
                 click(newSquare);
             }
         }, 10);
-    };
+    }
 
     //************************************************************************
     // add bomb count to squares surrounding bombs
@@ -504,5 +504,5 @@ $(document).ready(function () {
     if (showBombs) {
         $('.bomb').html('<i class="fas fa-bomb"></i>');
         $('.bomb').css('color', 'darkred');
-    };
+    }
 });

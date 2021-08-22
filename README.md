@@ -56,11 +56,20 @@ I used a mix of jQuery and javascript.
 
 ## Testing
 
-### Validator Testing 
+### Validator Testing
+
++ HTML passed
+    + [W3Schools HTML](https://validator.w3.org/#validate_by_input)
++ CSS passed
+    + [W3Schools CSS](https://jigsaw.w3.org/css-validator/#validate_by_input)
++ Javascript passed (ES6 and ES10 warnings ignored)
+    + [Beautify Tools](https://beautifytools.com/javascript-validator.php)
 
 ### Unfixed Bugs
 
-Coming soon...
++ Issue with smaller screen phones
+    + Very difficult to touch the squares rendered on a smaller screen
+    + Possible solution is a "center of mass" of the touch to identify the target
 
 ## Deployment
 
