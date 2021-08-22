@@ -5,7 +5,9 @@ I hope you enjoy this as much as it was fun coding it.
 
 The base code used started from the tutorial posted by Ania and Traversy. [Build Minesweeper with JavaScript](https://www.youtube.com/watch?v=W0No1JDc6vE).
 
-I then added in some touch screen functionalities (mobile first approach) and extra flairs with flag counters, a timer, and best time tracker, and a reset button.
+As a principal resource, I used [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
+
+For some ideas on ways to accomplish tasks I used the [Stackoverflow](https://stackoverflow.com/) blog site.
 
 I used a mix of jQuery and javascript.
 
