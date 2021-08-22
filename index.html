@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- page title -->
     <title>Minesweeper</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -61,8 +62,14 @@
                     <div class="d-grid gap-2">
                         <button id="play-again-button" class="btn btn-outline-primary" type="button">Play again</button>
                     </div>
+                    <div class="d-grid gap-2">
+                        <button id="instructions-button" class="btn btn-outline-secondary" type="button">Instructions</button>
+                    </div>
                 </div>
                 <div class="col-md-9">
+                    <div id="game-result-div" class="d-grid gap-2 alert" role="alert">
+                        <span id="game-result"></span>
+                    </div>
                     <div class="grid"></div>
                 </div>
             </div>

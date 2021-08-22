@@ -10,6 +10,9 @@ $(document).ready(function () {
     // find reset button
     const resetButton = $('#play-again-button');
 
+    // find instructions button
+    const instructionsButton = $('#instructions-button');
+
     function gameReset(resetVal) {
         bombsCount = parseInt(resetVal);
         emptyCount = (dimensionWH * dimensionWH) - bombsCount;
@@ -18,6 +21,9 @@ $(document).ready(function () {
         secondCounter = 0;
         $('#time').text(`${secondCounter}`);
         $('#flags').text(`${bombsCount}`);
+        $('#game-result').text('');
+        $('#game-result-div').removeClass('alert-danger');
+        $('#game-result-div').removeClass('alert-success');
     };
 
     resetButton.click(function (e) {
@@ -44,6 +50,15 @@ $(document).ready(function () {
         // reoload squares into grid
         loadGrid();
     })
+
+    instructionsButton.click(function (e) { 
+        alert(`
+        Click / touch to check a square
+        Right-Click / long-touch to flag a square
+
+        GL HF
+        `);
+    });
 
     // iterating over each anchor tag, add the Event Listener
     for (anchorTag of anchorTags) {
@@ -300,6 +315,8 @@ $(document).ready(function () {
             $('.bomb').css('border-style', 'inset');
             $('.bomb').css('background-color', 'lightgoldenrodyellow');
             $('.flagged').css('background-color', 'lightskyblue');
+            $('#game-result').text('BOOM! Game over! :(');
+            $('#game-result-div').addClass('alert-danger');
             console.log('Game over, try again!');
             isGameOver = true;
         } else {
@@ -319,6 +336,8 @@ $(document).ready(function () {
                     } else if (parseInt($('#time').text()) < parseInt($('#best').text())) {
                         $('#best').text(parseInt($('#time').text()))
                     };
+                    $('#game-result').text('YAY! Game over, you win!');
+                    $('#game-result-div').addClass('alert-success');
                     console.log('Game over, you win!');
                     isGameOver = true;
                 }
@@ -357,6 +376,8 @@ $(document).ready(function () {
             } else if (parseInt($('#time').text()) < parseInt($('#best').text())) {
                 $('#best').text(parseInt($('#time').text()))
             };
+            $('#game-result').text('YAY! Game over, you win!');
+            $('#game-result-div').addClass('alert-success');
             console.log('Game over, you win!');
             isGameOver = true;
         }

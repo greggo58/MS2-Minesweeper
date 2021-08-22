@@ -1,3 +1,4 @@
+/* ---------- MAIN GRID SQUARE ---------- */
 .grid {
     margin: auto;
     height: 300px;
@@ -6,6 +7,8 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+/* ---------- SMALL SQUARES TO FILL THE GRID ---------- */
 
 .grid div {
     height: 30px;
@@ -18,37 +21,43 @@
     border-style: outset;
 }
 
+/* ---------- SQUARES CLICKED ON & WITHOUT A BOMB ---------- */
+
 .checked {
     background-color: lightgreen;
 }
+
+/* ---------- SQUARES RIGHT-CLICKED ---------- */
 
 .flagged {
     background-color: lightskyblue;
     color: navy;
 }
 
+/* ---------- PLAY AREA SECTION ---------- */
+
+.section-play-area {
+    margin-bottom: 10vh;
+}
+
+/* ---------- RESET BUTTON ---------- */
+
 #play-again-button {
     margin: 10px;
 }
 
-/* @media screen and (max-width: 768px) {
+/* ---------- INSTRUCTIONS BUTTON ---------- */
 
-    .grid {
-        height: 100vw;
-        width: 100vw;
-        background-color: lightgray;
-        display: flex;
-        flex-wrap: wrap;
-    }
+#instructions-button {
+    margin: 10px;
+}
 
-    .grid div {
-        height: 10vw;
-        width: 10vw;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-style: outset;
-    }
+/* ---------- GAME OVER MESSAGE FOR WIN OR LOSE ---------- */
 
-  } */
+#game-result-div {
+    margin: 10px;
+}
+
+#game-result {
+    margin: auto;
+}
