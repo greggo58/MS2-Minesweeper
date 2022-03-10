@@ -7,6 +7,59 @@ $(document).ready(function () {
     // find the anchor tags from the navbar
     const anchorTags = $('ul.nav li a');
 
+    // find reset button
+    const resetButton = $('#play-again-button');
+
+    // find instructions button
+    const instructionsButton = $('#instructions-button');
+
+    function gameReset(resetVal) {
+        bombsCount = parseInt(resetVal);
+        emptyCount = (dimensionWH * dimensionWH) - bombsCount;
+        squares = [];
+        clearInterval(timerRec);
+        secondCounter = 0;
+        $('#time').text(`${secondCounter}`);
+        $('#flags').text(`${bombsCount}`);
+        $('#game-result').text('');
+        $('#game-result-div').removeClass('alert-danger');
+        $('#game-result-div').removeClass('alert-success');
+    }
+
+    resetButton.click(function () {
+        isGameOver = false;
+        let currentLevel = $('ul.nav li a.link-primary').attr('id');
+        switch (currentLevel) {
+            case 'Easy':
+                gameReset(10);
+                break;
+            case 'Medium':
+                gameReset(15);
+                break;
+            case 'Hard':
+                gameReset(20);
+                break;
+            case 'Insane':
+                gameReset(25);
+                break;
+            default:
+                alert('Unidentified link');
+        }
+        // clear grid of squares
+        grid.children().remove();
+        // reoload squares into grid
+        loadGrid();
+    });
+
+    instructionsButton.click(function () { 
+        alert(`
+        Click / touch to check a square
+        Right-Click / long-touch to flag a square
+
+        GL HF
+        `);
+    });
+
     // iterating over each anchor tag, add the Event Listener
     for (anchorTag of anchorTags) {
         anchorTag.addEventListener('click', function (e) {
