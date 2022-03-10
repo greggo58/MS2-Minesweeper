@@ -90,7 +90,7 @@ $(document).ready(function () {
             }
             // clear grid of squares
             grid.children().remove();
-            // reload squares into grid
+            // reoload squares into grid
             loadGrid();
             /* get the anchor tag cousins - look up to parent (li), get sibling (li) tags,
             list the anchor tag children per sibling */
@@ -142,9 +142,7 @@ $(document).ready(function () {
         gridArray = emptyArray.concat(bombsArray);
 
         // shuffle the grid array evenly
-        gridArray.sort(function () {
-            return 0.5 - Math.random();
-        });
+        gridArray.sort(function () { return 0.5 - Math.random(); });
 
         // build all the required divs (total divs = dimensionWH * dimensionWH)
         for (let i = 0; i < dimensionWH * dimensionWH; i++) {
@@ -166,7 +164,13 @@ $(document).ready(function () {
                 // execute right-click function
                 rightClick(square);
             });
-            
+            // add event to register finger touching screen
+            square.addEventListener('touchstart', onTouchSquare, true);
+            // add event to register finger dragging over screen
+            square.addEventListener('touchmove', onTouchSquare, true);
+            // add event to register finger leaving screen
+            square.addEventListener('touchend', onTouchSquare, true);
+
             // with each iteration the grid is filled with another square
             $(grid).append(square);
             // build out squares array to match the grid full of div squares
@@ -176,7 +180,104 @@ $(document).ready(function () {
         addBombs(squares);
     }
 
-    
+    //************************************************************************
+    //touch screen capabilities
+    //************************************************************************
+
+    let timerFunc;
+    let touchDuration = 500; //length of time we want the user to touch before we do something
+    let touchLimitReached;
+    let touchMoved = false;
+
+    function onTouchSquare(e) {
+        // cancel default behaviour, only if it can be cancelled
+        if (e.cancelable) e.preventDefault();
+        // if more than one finger ir touch device is touching the screen at any moment, ignore
+        if (e.touches.length > 1 || (e.type == "touchend" && e.touches.length > 0))
+            return;
+
+        // mimic the touches as mouse click events
+        let newEvent = document.createEvent("MouseEvents");
+        let type = null;
+        let touch = null;
+
+        switch (e.type) {
+            case "touchstart":
+                type = "mousedown";
+                touch = e.changedTouches[0];
+                // initialising tests
+                touchLimitReached = false;
+                touchMoved = false;
+                // wait for some time to register a long touch as a "right-click"
+                timerFunc = setTimeout(() => {
+                    // replicate touch as a mouse click event
+                    // moved the newEvent into the case block to grab the newEvent for the functions
+                    newEvent.initMouseEvent(type, true, true, e.window, 0,
+                        touch.screenX, touch.screenY, touch.clientX, touch.clientY,
+                        e.ctrlKey, e.altKey, e.shiftKey, e.metaKey, 0, null);
+                    e.target.dispatchEvent(newEvent);
+                    // right-click function
+                    onLongTouch(newEvent);
+                    // long touch time reached
+                    touchLimitReached = true;
+                }, touchDuration);
+                break;
+            case "touchmove":
+                type = "mousemove";
+                touch = e.changedTouches[0];
+                // if moving finger over screen (scrolling screen), clear timer for long touch
+                if (timerFunc) clearTimeout(timerFunc);
+                // register finger moved over screen
+                touchMoved = true;
+                break;
+            case "touchend":
+                type = "mouseup";
+                touch = e.changedTouches[0];
+                // if finger lifts off clear timer
+                if (timerFunc) clearTimeout(timerFunc);
+                // replicate touch as a mouse click event
+                // moved the newEvent into the case block to grab the newEvent for the functions
+                newEvent.initMouseEvent(type, true, true, e.window, 0,
+                    touch.screenX, touch.screenY, touch.clientX, touch.clientY,
+                    e.ctrlKey, e.altKey, e.shiftKey, e.metaKey, 0, null);
+                e.target.dispatchEvent(newEvent);
+                /* if the long touch timer duration was not reached and the finger was not moved over the screen,
+                run the click(square) function */
+                if (!touchLimitReached && !touchMoved) onShortTouch(newEvent);
+                break;
+        }
+    }
+
+    function onLongTouch(newEvent) {
+        // identify target square from the touch and run the function as though the square was right-clicked
+        /* placed in try block because of Font Awesome HTML element added
+        - path[0] is for no Font Awesome HTML element existing */
+        try {
+            const touchedId = squares[parseInt(newEvent.path[0].id)].id;
+            const touchedSquare = $(`#${touchedId}`);
+            rightClick(touchedSquare);
+        } catch {
+            const touchedId = squares[parseInt(newEvent.path[1].id)].id;
+            const touchedSquare = $(`#${touchedId}`);
+            rightClick(touchedSquare);
+        }
+    }
+
+    function onShortTouch(newEvent) {
+        // identify target square from the touch and run the function as though the square was clicked
+        /* placed in try block because of Font Awesome HTML element added
+        - path[0] is for no Font Awesome HTML element existing */
+        try {
+            const touchedId = squares[parseInt(newEvent.path[0].id)].id;
+            const touchedSquare = $(`#${touchedId}`);
+            click(touchedSquare);
+        } catch {
+            const touchedId = squares[parseInt(newEvent.path[1].id)].id;
+            const touchedSquare = $(`#${touchedId}`);
+            click(touchedSquare);
+        }
+    }
+
     // run function to build grid on page
     loadGrid();
 
@@ -404,5 +505,4 @@ $(document).ready(function () {
         $('.bomb').html('<i class="fas fa-bomb"></i>');
         $('.bomb').css('color', 'darkred');
     }
-
 });
