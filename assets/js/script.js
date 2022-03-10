@@ -127,4 +127,59 @@ $(document).ready(function () {
     // run function to build grid on page
     loadGrid();
 
+    //************************************************************************
+    // add bomb count to squares surrounding bombs
+    //************************************************************************
+    function addBombs(squares) {
+        for (i in squares) {
+            i = parseInt(i);
+
+            // are we on a square in the 1st column (West edge)?
+            const isWestEdge = i % dimensionWH === 0;
+            // are we on a square in the last column (East edge)?
+            const isEastEdge = i % dimensionWH === dimensionWH - 1;
+            // are we on a square in the 1st row (North edge)?
+            const isNorthEdge = i < dimensionWH;
+            // are we on a square in the last row (South edge)?
+            const isSouthEdge = i > (squares.length - 1) - dimensionWH;
+
+            // initialise total bombs
+            total = 0;
+
+            // add or subtract 1 to move 1 square to the right or left, respectively
+            // add or subtract dimensionWH to move 1 row to down or up, respectively
+
+            //only count bombs in empty squares, then return the number in the innerHTML
+            if (squares[i].classList.contains('empty')) {
+                // bomb on West square? - Cannot be on West Edge because no West square exists there!
+                if (!isWestEdge && squares[i - 1].classList.contains('bomb')) total++;
+                // bomb on South West square? - Cannot be on West / South Edge because no West / South square exists there!
+                if (!isSouthEdge && !isWestEdge && squares[i - 1 + dimensionWH].classList.contains('bomb')) total++;
+                // bomb on South square? - Cannot be on South Edge because no South square exists there!
+                if (!isSouthEdge && squares[i + dimensionWH].classList.contains('bomb')) total++;
+                // bomb on South East square? - Cannot be on South East Edge because no South East square exists there!
+                if (!isSouthEdge && !isEastEdge && squares[i + 1 + dimensionWH].classList.contains('bomb')) total++;
+                // bomb on East square? - Cannot be on East Edge because no East square exists there!
+                if (!isEastEdge && squares[i + 1].classList.contains('bomb')) total++;
+                // bomb on North East square? - Cannot be on North East Edge because no North / East square exists there!
+                if (!isNorthEdge && !isEastEdge && squares[i + 1 - dimensionWH].classList.contains('bomb')) total++;
+                // bomb on North square? - Cannot be on North Edge because no North square exists there!
+                if (!isNorthEdge && squares[i - dimensionWH].classList.contains('bomb')) total++;
+                // bomb on North West square? - Cannot be on North West Edge because no North / West square exists there!
+                if (!isNorthEdge && !isWestEdge && squares[i - 1 - dimensionWH].classList.contains('bomb')) total++;
+                squares[i].setAttribute('data', total);
+            }
+        }
+    }
+
+    //************************************************************************
+    // test mode activation to see bombs || when clicking a bomb
+    //************************************************************************
+    let showBombs = false;
+
+    if (showBombs) {
+        $('.bomb').html('<i class="fas fa-bomb"></i>');
+        $('.bomb').css('color', 'darkred');
+    }
+
 });
