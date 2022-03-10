@@ -6,6 +6,29 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+/* ---------- MAIN GRID SQUARE ---------- */
+.grid {
+    margin: auto;
+    height: 300px;
+    width: 300px;
+    background-color:lightgray ;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* ---------- SMALL SQUARES TO FILL THE GRID ---------- */
+
+.grid div {
+    height: 30px;
+    width: 30px;
+    font-size: 12px;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: outset;
+}
+
 /* ---------- PLAY AREA SECTION ---------- */
 
 .section-play-area {
