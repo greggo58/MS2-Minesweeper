@@ -3,6 +3,8 @@
 This site hopes to show my rendition of the classic minesweeper game. The game is simplistic, and yet, so addictive. Its purpose is as a general time-waster and something of a mental stimulator.
 I hope you enjoy this as much as it was fun coding it.
 
+Deployed using GitHub Pages: [Minesweeper Replica](https://greggo58.github.io/MS2-Minesweeper/)
+
 The base code used started from the tutorial posted by Ania and Traversy. [Build Minesweeper with JavaScript](https://www.youtube.com/watch?v=W0No1JDc6vE).
 
 As a principal resource, I used [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
