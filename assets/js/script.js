@@ -230,6 +230,74 @@ $(document).ready(function () {
     }
 
     //************************************************************************
+    // function to check neighbouring squares
+    //************************************************************************
+    function checkNeighbour(square, currentId) {
+        // are we on a square in the 1st column (West edge)?
+        const isWestEdge = currentId % dimensionWH === 0;
+        // are we on a square in the last column (East edge)?
+        const isEastEdge = currentId % dimensionWH === dimensionWH - 1;
+        // are we on a square in the 1st row (North edge)?
+        const isNorthEdge = currentId < dimensionWH;
+        // are we on a square in the last row (South edge)?
+        const isSouthEdge = currentId > (squares.length - 1) - dimensionWH;
+
+        // add or subtract 1 to move 1 square to the right or left, respectively
+        // add or subtract dimensionWH to move 1 row to down or up, respectively
+
+        setTimeout(() => {
+            // simulate click on West square
+            if (!isWestEdge) {
+                const newId = squares[parseInt(currentId) - 1].id;
+                const newSquare = $(`#${newId}`);
+                click(newSquare);
+            }
+            // simulate click on South West square
+            if (!isSouthEdge && !isWestEdge) {
+                const newId = squares[parseInt(currentId) - 1 + dimensionWH].id;
+                const newSquare = $(`#${newId}`);
+                click(newSquare);
+            }
+            // simulate click on South square
+            if (!isSouthEdge) {
+                const newId = squares[parseInt(currentId) + dimensionWH].id;
+                const newSquare = $(`#${newId}`);
+                click(newSquare);
+            }
+            // simulate click on South East square
+            if (!isSouthEdge && !isEastEdge) {
+                const newId = squares[parseInt(currentId) + 1 + dimensionWH].id;
+                const newSquare = $(`#${newId}`);
+                click(newSquare);
+            }
+            // simulate click on East square
+            if (!isEastEdge) {
+                const newId = squares[parseInt(currentId) + 1].id;
+                const newSquare = $(`#${newId}`);
+                click(newSquare);
+            }
+            // simulate click on North East square
+            if (!isNorthEdge && !isEastEdge) {
+                const newId = squares[parseInt(currentId) + 1 - dimensionWH].id;
+                const newSquare = $(`#${newId}`);
+                click(newSquare);
+            }
+            // // simulate click on North square
+            if (!isNorthEdge) {
+                const newId = squares[parseInt(currentId) - dimensionWH].id;
+                const newSquare = $(`#${newId}`);
+                click(newSquare);
+            }
+            // simulate click on North West square
+            if (!isNorthEdge && !isWestEdge) {
+                const newId = squares[parseInt(currentId) - 1 - dimensionWH].id;
+                const newSquare = $(`#${newId}`);
+                click(newSquare);
+            }
+        }, 10);
+    }
+
+    //************************************************************************
     // add bomb count to squares surrounding bombs
     //************************************************************************
     function addBombs(squares) {
