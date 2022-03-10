@@ -53,6 +53,14 @@ $(document).ready(function () {
 
     instructionsButton.click(function () { 
         alert(`
+        Welcome to Minesweeper (Replica)
+        
+        - Only click squares you believe to be empty of bombs!
+        - Right-click squares to flag a potential bomb square
+        to avoid a bad outcome ;)
+        - Flag all bomb squares or click all clear ones to
+        win the game!
+        
         Click / touch to check a square
         Right-Click / long-touch to flag a square
 
