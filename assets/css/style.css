@@ -35,6 +35,13 @@ body {
     background-color: lightgreen;
 }
 
+/* ---------- SQUARES RIGHT-CLICKED ---------- */
+
+.flagged {
+    background-color: lightskyblue;
+    color: navy;
+}
+
 /* ---------- PLAY AREA SECTION ---------- */
 
 .section-play-area {

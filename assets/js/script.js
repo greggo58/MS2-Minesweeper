@@ -199,6 +199,37 @@ $(document).ready(function () {
     }
 
     //************************************************************************
+    // right-click function from event listener
+    //************************************************************************
+    function rightClick(square) {
+        // Game over? Do nothing more...
+        if (isGameOver) return;
+        // Square is already checked? Do nothing to the square...
+        if ($(square).hasClass('checked')) return;
+        // Square is already flagged? Remove '.flagged' class - vice versa
+        $(square).toggleClass('flagged');
+        $('#flags').text(`${bombsCount - $('.flagged').length}`);
+        if ($(square).hasClass('flagged')) {
+            $(square).html('<i class="fas fa-flag"></i>');
+        } else {
+            $(square).text('');
+        }
+        // all bomb squares flagged only - player has won and the game is over...
+        if ($('.bomb.flagged').length === bombsCount && $('.flagged').length === bombsCount) {
+            clearInterval(timerRec);
+            if (parseInt($('#best').text()) === 0) {
+                $('#best').text(parseInt($('#time').text()));
+            } else if (parseInt($('#time').text()) < parseInt($('#best').text())) {
+                $('#best').text(parseInt($('#time').text()));
+            }
+            $('#game-result').text('YAY! Game over, you win!');
+            $('#game-result-div').addClass('alert-success');
+            console.log('Game over, you win!');
+            isGameOver = true;
+        }
+    }
+
+    //************************************************************************
     // add bomb count to squares surrounding bombs
     //************************************************************************
     function addBombs(squares) {
