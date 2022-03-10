@@ -4,6 +4,56 @@ $(document).ready(function () {
     // find the div with class 'grid'
     const grid = $('.grid');
 
+    // find the anchor tags from the navbar
+    const anchorTags = $('ul.nav li a');
+
+    // iterating over each anchor tag, add the Event Listener
+    for (anchorTag of anchorTags) {
+        anchorTag.addEventListener('click', function (e) {
+            // cancel default behaviour, only if it can be cancelled
+            if (e.cancelable) e.preventDefault();
+            let currentLevelBefore = $('.link-primary').attr('id');
+            // add class 'link-primary' (only if it does not exist) for my selected navbar link (blue)
+            $(e.target).toggleClass('link-primary', true);
+            // remove class 'link-dark' (only if it exists) for my selected navbar link (dark gray)
+            $(e.target).toggleClass('link-dark', false);
+            // new game
+            isGameOver = false;
+            switch (e.target.id) {
+                case 'Easy':
+                    gameReset(10);
+                    break;
+                case 'Medium':
+                    gameReset(15);
+                    break;
+                case 'Hard':
+                    gameReset(20);
+                    break;
+                case 'Insane':
+                    gameReset(25);
+                    break;
+                default:
+                    alert('Unidentified link');
+            }
+            // clear grid of squares
+            grid.children().remove();
+            // reload squares into grid
+            loadGrid();
+            /* get the anchor tag cousins - look up to parent (li), get sibling (li) tags,
+            list the anchor tag children per sibling */
+            anchorCousins = $(e.target).parent().siblings('li').children('a');
+            // for each cousin do the reverse
+            for (let anchorCousin of anchorCousins) {
+                // remove class 'link-primary' (only if it exists) for my selected navbar link (blue)
+                $(`#${anchorCousin.id}`).toggleClass('link-primary', false);
+                // add class 'link-dark' (only if it exists) for my selected navbar link (dark gray)
+                $(`#${anchorCousin.id}`).toggleClass('link-dark', true);
+            }
+            let currentLevelAfter = $('.link-primary').attr('id');
+            if (currentLevelBefore !== currentLevelAfter) $('#best').text('0');
+        });
+    }
+
     //************************************************************************
     // initialization
     //************************************************************************
