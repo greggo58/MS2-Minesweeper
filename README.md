@@ -43,8 +43,24 @@ I had issues with GitPod and so I wrote this mainly in VS Code on my local PC.
     + Grid div filled with small square divs (wrapped at 10 divs)
 
 ### Features Left to Implement
+...
 
-## Design Choices
+## User Experience (UX)
+
+-   ### User stories
+
+    -   #### First Time Visitor Goals
+
+        1. As a First Time Visitor, I want to easily understand the main purpose of the site and be ready to play a simple game.
+        2. As a First Time Visitor, I want to be able to easily navigate throughout the site to adjust difficulty and give myself a challenge.
+    -   #### Returning Visitor Goals
+
+        1. As a Returning Visitor, I want to load the page quickly and adjust to a higher difficulty.
+
+    -   #### Frequent User Goals
+        1. As a Frequent User, I want to return each time for a quick and simple game to kill some time.
+
+### Design Choices
 
 + Very basic page design and colouring (Bootstrap) to rather place the focus on the minesweeper grid.
 + Page header is the title and navbar.
@@ -69,6 +85,25 @@ I had issues with GitPod and so I wrote this mainly in VS Code on my local PC.
 + Javascript passed (ES6 and ES10 warnings ignored)
     + [Beautify Tools](https://beautifytools.com/javascript-validator.php)
 
+### Testing User Stories from User Experience (UX) Section
+
+- ### First Time Visitor Goals
+
+    1. As a First Time Visitor, I want to easily understand the main purpose of the site and be ready to play a simple game.
+        1. As a First Time Visitor, I can easily see the well-known game of Minesweeper and unserstand that the purpose is to play a simple game.
+    2. As a First Time Visitor, I want to be able to easily navigate throughout the site to adjust difficulty and give myself a challenge.
+        1. As a First Time Visitor, I can clearly see the navigation and action buttons and know what they will do.
+
+- ### Returning Visitor Goals
+
+    1. As a Returning Visitor, I want to load the page quickly and adjust to a higher difficulty.
+        1. As a Returning Visitor, I see the page loading quickly and I am able to set the difficulty to my preference using the navigation.
+
+- ### Frequent User Goals
+
+    1. As a Frequent User, I want to return each time for a quick and simple game to kill some time.
+        1. As a Frequent User, I am easily able to return to this site and play a game quickly, without setup, configuration, or too much fuss.
+
 ### Unfixed Bugs
 
 + Issue with smaller screen phones
@@ -77,9 +112,59 @@ I had issues with GitPod and so I wrote this mainly in VS Code on my local PC.
 
 ## Deployment
 
-Coming soon...
+### GitHub Pages
+
+The project was deployed to GitHub Pages using the following steps...
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/)
+2. At the top of the Repository (not top of page), locate the "Settings" Button on the menu.
+    - Alternatively Click [Here](https://raw.githubusercontent.com/) for a GIF demonstrating the process starting from Step 2.
+3. Scroll down the Settings page until you locate the "GitHub Pages" Section.
+4. Under "Source", click the dropdown called "None" and select "Master Branch".
+5. The page will automatically refresh.
+6. Scroll back down through the page to locate the now published site [link](https://github.com) in the "GitHub Pages" section.
+
+### Forking the GitHub Repository
+
+By forking the GitHub Repository we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original repository by using the following steps...
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/)
+2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
+3. You should now have a copy of the original repository in your GitHub account.
+
+### Making a Local Clone
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/)
+2. Under the repository name, click "Clone or download".
+3. To clone the repository using HTTPS, under "Clone with HTTPS", copy the link.
+4. Open Git Bash
+5. Change the current working directory to the location where you want the cloned directory to be made.
+6. Type `git clone`, and then paste the URL you copied in Step 3.
+
+```
+$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+```
+
+7. Press Enter. Your local clone will be created.
+
+```
+$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+> Cloning into `CI-Clone`...
+> remote: Counting objects: 10, done.
+> remote: Compressing objects: 100% (8/8), done.
+> remove: Total 10 (delta 1), reused 10 (delta 1)
+> Unpacking objects: 100% (10/10), done.
+```
+
+Click [Here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop) to retrieve pictures for some of the buttons and more detailed explanations of the above process.
 
 ## Credits
+
+### Languages Used
+
+-   [HTML5](https://en.wikipedia.org/wiki/HTML5)
+-   [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+-   [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 
 ### Reference Sites
 
@@ -100,3 +185,5 @@ Coming soon...
 ### Media
 
 ### Wireframes
+
+ - Main page - [View](https://github.com/greggo58/MS2-Minesweeper/blob/main/wireframes/Minesweeper%20Wireframe.png)
