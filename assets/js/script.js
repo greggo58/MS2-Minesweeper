@@ -128,6 +128,77 @@ $(document).ready(function () {
     loadGrid();
 
     //************************************************************************
+    // click function from click event listener
+    //************************************************************************
+
+    let secondCounter = 0;
+
+    let timerRec;
+
+    function gameTimer() {
+        let seconds = Math.floor(secondCounter);
+        $('#time').text(`${Math.floor(seconds / 100)}`);
+        secondCounter++;
+    }
+
+    function click(square) {
+        let currentId = $(square).attr('id');
+
+        if ($('.checked').length < 1) timerRec = setInterval(gameTimer, 10);
+
+        // Game over? Do nothing more but show bombs...
+        if (isGameOver) return;
+        // Square is already checked / flagged? Do nothing to the square...
+        if ($(square).hasClass('checked') || $(square).hasClass('flagged')) return;
+        /* Was a bomb square clicked? Game over.
+        If not, insert a number if a bomb is in a nearby square or
+        simulate a click on a 'zero' total square and repeat */
+        if ($(square).hasClass('bomb')) {
+            clearInterval(timerRec);
+            // this will show all other bombs
+            $('.bomb').html('<i class="fas fa-bomb"></i>');
+            $('.bomb').css('color', 'darkred');
+            $('.bomb').css('border-style', 'inset');
+            $('.bomb').css('background-color', 'lightgoldenrodyellow');
+            $('.flagged').css('background-color', 'lightskyblue');
+            $('#game-result').text('BOOM! Game over! :(');
+            $('#game-result-div').addClass('alert-danger');
+            console.log('Game over, try again!');
+            isGameOver = true;
+        } else {
+            let total = $(square).attr('data');
+
+            if (total != 0) {
+                // square is checked with a normal / left click
+                $(square).addClass('checked');
+                $('.checked').css('border-style', 'inset');
+                // show the number of bombs in immediate surrounding squares
+                $(square).text(total);
+                // if all possible squares are checked, player has won and the game is over...
+                if ($('.empty.checked').length === emptyCount) {
+                    clearInterval(timerRec);
+                    if (parseInt($('#best').text()) === 0) {
+                        $('#best').text(parseInt($('#time').text()));
+                    } else if (parseInt($('#time').text()) < parseInt($('#best').text())) {
+                        $('#best').text(parseInt($('#time').text()));
+                    }
+                    $('#game-result').text('YAY! Game over, you win!');
+                    $('#game-result-div').addClass('alert-success');
+                    console.log('Game over, you win!');
+                    isGameOver = true;
+                }
+                // return out the function...
+                return;
+            }
+            // no bombs in the immediate surrounding squares (i.e. total = 0)? Check all the neighbours...
+            checkNeighbour(square, currentId);
+            // consider this square as checked
+            $(square).addClass('checked');
+            $('.checked').css('border-style', 'inset');
+        }
+    }
+
+    //************************************************************************
     // add bomb count to squares surrounding bombs
     //************************************************************************
     function addBombs(squares) {

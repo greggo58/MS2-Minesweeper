@@ -29,6 +29,12 @@ body {
     border-style: outset;
 }
 
+/* ---------- SQUARES CLICKED ON & WITHOUT A BOMB ---------- */
+
+.checked {
+    background-color: lightgreen;
+}
+
 /* ---------- PLAY AREA SECTION ---------- */
 
 .section-play-area {
