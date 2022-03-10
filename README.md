@@ -186,4 +186,4 @@ Click [Here](https://help.github.com/en/github/creating-cloning-and-archiving-re
 
 ### Wireframes
 
- - Main page - [View](https://github.com/greggo58/MS2-Minesweeper/blob/main/wireframes/Minesweeper%20Wireframe.png)
+ - Main page - [View](https://github.com/greggo58/MS2-Minesweeper/blob/main/Minesweeper%20Wireframe.png)
